@@ -1,0 +1,100 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{LayoutPadrao}">
+
+<head>
+	<title>Atividades Complementares</title>
+	<script>
+		$(function () {
+			$('[data-toggle="popover"]').popover()
+		})
+	</script>
+</head>
+
+<body>
+
+	<div class="card">
+		<div class="card-header tux-titulo-panel">
+			<span class="ux-titulo-panel"> Pesquisa</span>
+		</div>
+
+		<section class="pt-3" layout:fragment="conteudo">
+
+			<div class="d-flex flex-row-reverse px-4">
+				<a href="/atividade/novo/" class="btn btn-primary add-activity-btn px-4">
+					Cadastrar nova atividade</a>
+			</div>
+			
+			<div class="card-body">
+				<table class="table table-bordered table-striped text-center">
+					<thead>
+						<tr >
+							<th scope="col" class="align-middle">#</th>
+							<th scope="col" class="align-middle">Descrição</th>
+							<th scope="col" class="align-middle">Tipo de Atividade</th>
+							<th scope="col" class="align-middle">Carga Horária</th>
+							<th scope="col" class="align-middle">Instituição</th>
+							<th scope="col" class="align-middle">Status</th>
+							<th scope="col" class="align-middle">Ações
+								<button type="button" class="btn btn-link" id="acoes-btn" data-toggle="popover"
+									title="Editar e Deletar" data-placement="top"
+									data-content="As atividades só podem ser modificadas enquanto estão pendentes análise.">
+									<i class="material-icons">help</i>
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr scope="row" th:each="atividade : ${atividades}" class="text-center ">
+
+							<td></td>
+							<td th:text="${atividade.descricao_atividade}" class="text-left "></td>
+							<td th:text="${atividade.tipo_atividade.descricao}"></td>
+							<td th:text="${atividade.carga_horaria}"></td>
+							<td th:text="${{atividade.instituicao}}"></td>
+
+							<td class="text-center">
+								<th:block th:switch="${atividade.status.descricao}">
+									<span th:case="'Pendente'" class="badge badge-warning "
+										th:text="${atividade.status.descricao}"></span>
+									<span th:case="'Deferido'" class="badge badge-success "
+										th:text="${atividade.status.descricao}"></span>
+									<span th:case="Indeferido" class="badge badge-danger "
+										th:text="${atividade.status.descricao}"></span>
+									<span th:case="*" class="badge badge-info "
+										th:text="${atividade.status.descricao}"></span>
+								</th:block>
+							</td>
+
+							<td class="text-center">
+								<div class="row justify-content-center">
+									<form
+										th:action="@{/atividade/{id_ativ_complementar}(id_ativ_complementar=${atividade.id_ativ_complementar})}">
+										<button type="submit" class="btn btn-link" title="editar"
+											th:disabled="${ atividade.status.descricao == 'Pendente' ? false : true }">
+											<i class="material-icons">edit</i>
+										</button>
+									</form>
+
+									<form
+										th:action="@{/atividade/delete/{id_ativ_complementar}(id_ativ_complementar=${atividade.id_ativ_complementar})}"
+										method="post">
+										<button type="submit" class="btn btn-link" title="deletar"
+											th:disabled="${ atividade.status.descricao == 'Pendente' ? false : true }">
+											<i class="material-icons">delete</i>
+										</button>
+									</form>
+								</div>
+							</td>
+						</tr>
+						<tr th:if="${#lists.isEmpty(atividades)}">
+							<td class="text-center" colspan="6">Nenhuma atividade foi encontrada.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</section>
+
+	</div>
+</body>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="modal fade" id="confirmacaoDeleteModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<!--
+		<form action="/tipoatividade/delete/" method="post" th:object="${tipo}">
+	-->
+		<form th:action="@{/tipoatividade/delete/{id_tipo}(id_tipo=${tipo.id_tipo_atividade})}" method="post"
+			th:object="${tipo}">
+
+			<input type="hidden" id="id_tipo_atividade" name="id_tipo_atividade" th:field="*{id_tipo_atividade}">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">Excluir</div>
+				</div>
+				<div class="modal-body">
+					<span></span>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button class="btn btn-danger" type="submit">Excluir</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{LayoutPadrao}">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>IFMT - Atividades Complementares</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+
+	<script src="/js/bootstrap.bundle.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-3.6.1.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+
+		<!--Form-->
+		<div class="container mt-5">
+
+			<!-- Alert -->
+			<div class="alert alert-dismissible alert-success fade show" role="alert"
+				th:if="${!#strings.isEmpty(mensagem)}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span th:text="${mensagem}"></span>
+			</div>
+
+			<h2 class="py-3">Cadastrar Tipo de Atividade</h2>
+
+			<form class="w-75" action="/tipoatividade/novo" method="post" th:object="${tipo}">
+				<div class="form-group">
+					<label for="descricao">Tipo de Atividade</label>
+					<textarea class="form-control" id="descricao" name="descricao" rows="1" th:field="*{descricao}"
+						required></textarea>
+					<input type="hidden" class="form-control" id="status" name="status" value="ACTIVE">
+				</div>
+				<input type="hidden" th:field="*{id_tipo_atividade}">
+
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+
+	</section>
+
+</body>
+
+</html>

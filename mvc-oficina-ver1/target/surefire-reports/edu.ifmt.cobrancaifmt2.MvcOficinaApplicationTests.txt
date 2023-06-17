@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: edu.ifmt.cobrancaifmt2.MvcOficinaApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.349 s <<< FAILURE! - in edu.ifmt.cobrancaifmt2.MvcOficinaApplicationTests
+edu.ifmt.cobrancaifmt2.MvcOficinaApplicationTests  Time elapsed: 0.347 s  <<< ERROR!
+java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
+
